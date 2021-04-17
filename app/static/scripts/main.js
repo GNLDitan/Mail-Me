@@ -29,14 +29,19 @@ function addEmailList(event) {
         var tc = document.getElementById('tagContainer');
         var node = document.createElement("span"); 
         var txt = document.createTextNode(event.currentTarget.value);
+        
         node.classList.add('tag')
         node.appendChild(txt);
+
         tc.appendChild(node)
+
+        addEmailSession(event.currentTarget.value)
+
         event.currentTarget.value = '';
       }
 }
 
-function addEmailSession(id) {
+function addEmailSession(email) {
     fetch(`/mail/inbox/email/session/${email}`, {
         method: 'GET'
     })
