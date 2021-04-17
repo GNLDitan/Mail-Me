@@ -1,0 +1,26 @@
+{% extends "client/inbox/inbox.html" %}
+
+{% block content %}
+<form method="POST">
+    <div class="form-group">
+       <div for="email">
+           <span>To</span> 
+           <span>
+               <span id="tagContainer">
+                   <!-- load user email in session -->
+                   <!-- {% foreach session user %}
+                   <span>{{session}}</span> -->
+               </span>
+               <input type="text" id="inputText" placeholder="input here.." onkeypress="addEmailList(event)"/>
+           </span>
+       </div>
+       <div for="email">
+           <span>CC</span> 
+           <span>
+                <input type="email" id="email" name="email" placeholder="Enter Email">
+           </span>
+       </div>
+   </div>
+</form>
+
+{% endblock %}
