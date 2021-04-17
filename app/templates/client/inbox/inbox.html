@@ -23,114 +23,14 @@
                 </tr>
             </thead>
             <tbody>
-            <tr onClick="gotoMessage(123)">
+            {% for inbox in inbox_list %}
+            <tr onClick="gotoMessage({{inbox.message_id}})">
                 <td><input type="checkbox"></td>
-                <td>Gerald Nick</td>
-                <td><b>This is sample 1 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
+                <td>{{ inbox.name }}</td>
+                <td><b>{{ inbox.subject }}</b> click here to participate..</td>
+                <td>{{ inbox.date  }}</td>
             </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>John Lloyd</td>
-                <td><b>This is sample 2 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>John Lloyd</td>
-                <td><b>This is sample 2 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>John Lloyd</td>
-                <td><b>This is sample 2 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Bea Alonzo</td>
-                <td><b>This is sample 3 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Gerald Nick</td>
-                <td><b>This is sample 1 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
-            <tr>
-                <td><input type="checkbox"></td>
-                <td>Gerald Nick</td>
-                <td><b>This is sample 1 title:</b> click here to participate..</td>
-                <td>12:30pm</td>
-            </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

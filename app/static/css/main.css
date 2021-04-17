@@ -60,7 +60,10 @@ body {
     overflow-y: scroll;
     margin-top:20px;
   }
-table.mail { height:  80%;}
+  
+table.mail { height:  80%;}   
+table.mail tr {  height: 10px; }
+table.mail tr td { padding:0px; }
 table.mail tr:hover { cursor: pointer; }
 
 .compose-container .tag {
@@ -77,11 +80,13 @@ table.mail tr:hover { cursor: pointer; }
     margin-bottom: 20px;
     padding-bottom: 5px;
 }
-.compose-container input { border: none; }
+.compose-container input { border: none; min-width: 30%; }
 .compose-container .tag:hover { cursor: pointer; }
 .compose-container textarea:focus, .compose-container input:focus{
     outline: none;
 }
+.compose-container input.fix { width: 90%;}
+
 
 .inbox-content.form-group {
     height: 63vh;

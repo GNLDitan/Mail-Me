@@ -21,7 +21,7 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(mail, url_prefix='/mail/')
 
-    from .models import User
+    from .models import User, Messages, Receiver, Carboncopy
     create_database(app)
 
     login_manager = LoginManager()
