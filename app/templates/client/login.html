@@ -41,9 +41,20 @@
                 </button>
                 <span class="float-right forgot-password"> <u>Forgot password?</u> </span>
             </form>
-            <div class="text-center" href="{{ url_for('mail.spam') }}">
-                or sign up using here
+            <div class="text-center">
+                <a class="text-center" href="{{ url_for('auth.sign_up') }}">
+                    or Sign up here
+                </a>
             </div>
+         
+            <form method="POST" action="/google-login">
+                <div class="google-btn mt-3" type="submit">
+                    <div class="google-icon-wrapper">
+                        <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+                     </div>
+                     <button type="submit">Sign in with google</button>
+                </div>
+            </form>
         </div>
         <div class="login-img" ></div>
     </div>

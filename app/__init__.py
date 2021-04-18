@@ -2,16 +2,25 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from os import path
+import os
+from dotenv import load_dotenv
+from authlib.integrations.flask_client import OAuth
 
 db = SQLAlchemy()
+load_dotenv()
 DB_NAME = "database.db"
+oauth = OAuth()
+
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'hjshjhdjah kjshkjdhjs'
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///{DB_NAME}'
-    db.init_app(app)
 
+    db.init_app(app)
+    oauth.init_app(app)
+
+    register_google(app)
 
     from .views import views
     from .auth import auth
@@ -40,3 +49,7 @@ def create_database(app):
     if not path.exists('website/' + DB_NAME):
         db.create_all(app=app)
         print('Created Database!')
+
+
+def register_google(app):
+      oauth = OAuth(app)

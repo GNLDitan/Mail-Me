@@ -4,5 +4,9 @@
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Flask
 app/*.pyc
+instance/*
+!instance/.gitignore
+.webassets-cache
 
