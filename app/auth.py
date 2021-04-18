@@ -1,10 +1,24 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from models import User
 from werkzeug.security import generate_password_hash, check_password_hash
-from . import db
+from . import db, oauth
 from flask_login import login_user, login_required, logout_user, current_user
+import os
 
 auth = Blueprint('auth', __name__)
+
+google = oauth.register(
+    name = os.getenv("GOOGLE_NAME"),
+    client_id = os.getenv("GOOGLE_CLIENT_ID"),
+    client_secret = os.getenv("GOOGLE_CLIENT_SECRET"),
+    access_token_url='https://accounts.google.com/o/oauth2/token',
+    access_token_params=None,
+    authorize_url='https://accounts.google.com/o/oauth2/auth',
+    authorize_params=None,
+    api_base_url='https://www.googleapis.com/oauth2/v1/',
+    userinfo_endpoint='https://openidconnect.googleapis.com/v1/userinfo', 
+    client_kwargs={'scope': 'openid email profile'},
+)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -47,7 +61,8 @@ def sign_up():
             flash('Passwords must be atleast 7 characters', category='error')
         else:
             new_user = User(email=email, first_name=first_name,
-                            password=generate_password_hash(password1))
+                            password=generate_password_hash(password1),
+                            issocialmedia=False)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -61,5 +76,42 @@ def sign_up():
 @login_required
 def logout():
     logout_user()
+    for key in list(session.keys()):
+        session.pop(key)
     return  render_template("client/login.html", user=current_user)
 
+
+@auth.route('/google-login', methods=['POST'])
+def google_login():
+    if request.method == 'POST':
+        google = oauth.create_client(os.getenv("GOOGLE_NAME"))  # create the google oauth client
+        redirect_uri = url_for('auth.google_authenticate', _external=True)
+        return google.authorize_redirect(redirect_uri)
+
+@auth.route('/google_authenticate')
+def google_authenticate():
+    google = oauth.create_client(os.getenv("GOOGLE_NAME")) 
+    token = google.authorize_access_token()
+    resp = google.get('userinfo') 
+    user_info = resp.json()
+
+    email =  user_info['email']
+    first_name = user_info['name'] + ' ' + user_info['family_name']
+    l_user = User.query.filter_by(email=user_info['email']).first()
+
+    if l_user:
+        login_user(l_user, remember=True)
+        flash('Login Successfuly', category='success')
+
+        return redirect(url_for('mail.inbox', _external=True))
+    else:
+        new_user = User(email=email, first_name=first_name, is_social_media=True, media_type='google')
+        db.session.add(new_user)
+        db.session.commit()
+        login_user(new_user, remember=True)
+        flash('Account Created', category='success')
+        flash('Login Successfuly', category='success')
+
+        return redirect(url_for('mail.inbox', _external=True))
+  
+  
