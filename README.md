@@ -13,8 +13,9 @@ create your virtual env
 pip install -r requirements.txt
 ```
 
+
+Request for latest env file
 ```bash
-request for latest env file
 paste on same level of main.py
 ```
 
