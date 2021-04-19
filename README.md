@@ -7,8 +7,7 @@ Make sure you have the latest version of Python installed.
 ```bash
 git clone <repo-url>
 ```
-create your virtual env
-docs: https://docs.python.org/3/library/venv.html
+Create your virtual env: https://docs.python.org/3/library/venv.html
 ```bash
 pip install -r requirements.txt
 ```
