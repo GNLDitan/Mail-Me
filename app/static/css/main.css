@@ -54,16 +54,23 @@ body {
 
 .login-form .forgot-password:hover { cursor: pointer; }
 
+
 .mail-wrapper { position:relative; }
 .mail-wrapper .mail-scroll {
     height: 85vh;
     overflow-y: scroll;
     margin-top:20px;
   }
-  
-table.mail { height:  80%;}   
+
+table.mail { max-height:  80%;}   
 table.mail tr {  height: 10px; }
 table.mail tr td { padding-bottom: 0px !important; }
+table.mail tr.unread { 
+    background-color: #e1e1e6;
+    border: #f2f2fa;
+    border-width: 2px;
+    border-style: solid;
+ }
 table.mail tr:hover { cursor: pointer; }
 
 .compose-container .tag {
@@ -82,15 +89,15 @@ table.mail tr:hover { cursor: pointer; }
 }
 .compose-container input { border: none; min-width: 30%; }
 .compose-container .tag:hover { cursor: pointer; }
-.compose-container textarea:focus, .compose-container input:focus{
+.compose- container textarea:focus, .compose-container input:focus{
     outline: none;
 }
-.compose-container input.fix { width: 90%;}
+.compose-container input.fix { width: 10%;}
 
-
-.inbox-content.form-group {
-    height: 63vh;
+.compose-container .inbox-content.form-group {
+  height: 63vh;
 }
+
 
 .message-container img { 
   height: 60px;
@@ -105,9 +112,47 @@ table.mail tr:hover { cursor: pointer; }
   margin-bottom: 20px;
   padding-bottom: 5px;
 }
+
+
+
+.message-container {
+  overflow-y: scroll;
+  position: relative;
+  height: 90vh;
+}
+.replay-container~.message-content {
+  height: 50vh !important;
+}
+
 .message-container img:hover { cursor: pointer; }
+.message-container .message-content { height: 100%; }
 .content-header .email-sender::before { content: '< ';}
 .content-header .email-sender::after { content: '>';}
+
+.replay-container .tag {
+  padding: 5px;
+  background: aliceblue;
+  border: deepskyblue 1px solid;
+  border-radius: 5px;
+  margin-right: 3px;
+}
+
+.replay-container .mail-form { 
+  border-bottom-style: groove; 
+  border-width: 2px;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+.replay-container input { border: none; min-width: 30%; }
+.replay-container .tag:hover { cursor: pointer; }
+.replay- container textarea:focus, .compose-container input:focus{
+  outline: none;
+}
+.replay-container input.fix { width: 10%;}
+.replay-container .inbox-content.form-group {
+  height: 30vh;
+}
+
 
 
 .google-btn {

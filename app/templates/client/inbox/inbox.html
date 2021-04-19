@@ -24,12 +24,20 @@
             </thead>
             <tbody>
             {% for inbox in inbox_list %}
-            <tr onClick="toInboxMessage({{inbox.id}})">
+            <tr onClick="toInboxMessage({{inbox.id}})"
+                 class="{{'unread' if not inbox.isread }}">
                 <td><input type="checkbox"></td>
-                <td>{{ inbox.name }} {{inbox.id}} </td>
-                <td><b>{{ inbox.subject }}</b> 
+                <td>{{ inbox.name }} </td>
+                <td>
+                   <span>
+                    <b>{{ inbox.subject }} :</b> 
+                    {{ inbox.p_content }}
+                   </span>  
                 </td>
-                <td>{{ inbox.date  }}</td>
+                <td>{{ inbox.date  }}
+           
+                </td>
+                
             </tr>
             {% endfor %}
             </tbody>
