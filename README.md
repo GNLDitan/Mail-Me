@@ -9,6 +9,7 @@ git clone <repo-url>
 ```
 
 ```bash
+create your virtual env
 pip install -r requirements.txt
 ```
 
