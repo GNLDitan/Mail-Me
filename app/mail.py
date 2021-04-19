@@ -119,6 +119,9 @@ def inboxmessagereply():
           
           for thread in message_data['threads']:
                email_to = thread['email_to']
+
+               if not (thread['email'] in s_email) and current_user.email != thread['email']:
+                         s_email.append(thread['email'])
            
                # reply all to and cc
                for m_t in email_to:
