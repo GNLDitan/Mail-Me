@@ -1,23 +1,55 @@
-{% extends "client/inbox/inbox.html" %}
+{% extends "client/inbox/message.html" %}
 
-{% block content %}
-<form method="POST">
-    <div class="form-group">
-       <div for="email">
-           <span>To</span> 
-           <span>
-               <span id="tagContainer">
+{% block messagetitle %}
+ <span> Re -</span>
+{% endblock %}
+<!-- {% block spnreply %} 
+    <span class="reply-child"></span>
+{% endblock %} -->
+
+{% block reply %}
+<div class="replay-container">
+    <form method="POST" action="/mail/auth/sendemail">
+        <button type="submit" class="btn btn-primary mb-3">
+            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            Send</button>
+        <div class="form-group">
+           <div for="email" class="mail-form">
+               <span>To:</span> 
+               <span>
+                   <span id="tagContainer">
+                       {% for email in s_email %}
+                          <span class="tag"> {{ email }}</span> 
+                       {% endfor %}
+                   </span>
+                   <input type="text" id="receiver" name="receiver"  placeholder="Enter Email" onkeypress="addEmailList(event)"/>
                </span>
-               <input type="text" id="inputText" placeholder="input here.." onkeypress="addEmailList(event)"/>
-           </span>
+           </div>
        </div>
-       <div for="email">
-           <span>CC</span> 
-           <span>
-                <input type="email" id="email" name="email" placeholder="Enter Email">
-           </span>
+       <div class="form-group">
+            <div for="ccemail" class="mail-form">
+                <span>CC:</span> 
+                <span>
+                    <input type="email" class="fix" id="ccemail" name="ccemail" placeholder="Enter CCEmail" >
+                </span>
+            </div>
        </div>
-   </div>
-</form>
+       <div class="form-group" hidden>
+            <div for="subject" class="mail-form">
+                <span>Re Subject: </span> 
+                <span>
+                    <input type="text" class="fix" id="subject" name="subject" placeholder="Enter Subject" 
+                    value="{{ message_data.subject }}">
+                </span>
+            </div>
+        </div>
+        
+       <div class="inbox-content form-group">
+            <textarea id="editor" id="content" name="content" ></textarea>
+       </div>
+     
+    </form>
+    
+</div>
 
 {% endblock %}
