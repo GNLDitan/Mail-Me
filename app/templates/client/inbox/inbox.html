@@ -24,10 +24,11 @@
             </thead>
             <tbody>
             {% for inbox in inbox_list %}
-            <tr onClick="gotoMessage({{inbox.message_id}})">
+            <tr onClick="toInboxMessage({{inbox.id}})">
                 <td><input type="checkbox"></td>
-                <td>{{ inbox.name }}</td>
-                <td><b>{{ inbox.subject }}</b> click here to participate..</td>
+                <td>{{ inbox.name }} {{inbox.id}} </td>
+                <td><b>{{ inbox.subject }}</b> 
+                </td>
                 <td>{{ inbox.date  }}</td>
             </tr>
             {% endfor %}
