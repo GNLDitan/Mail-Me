@@ -27,3 +27,9 @@ python main.py
 ## Viewing The App
 
 Go to `http://127.0.0.1:5000`
+
+## Creating Pull Request
+Make sure to update requirements.txt
+```bash
+pip freeze > requirements. txt
+```
