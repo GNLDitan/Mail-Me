@@ -18,7 +18,7 @@ class Messages(db.Model):
     content = db.Column(db.String(5000))
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     isread = db.Column(db.Boolean)
-    reply_id = db.Column(db.Boolean)
+    reply_id = db.Column(db.String(5000))
 
 class Receiver(db.Model):
     id = db.Column(db.Integer, primary_key=True)

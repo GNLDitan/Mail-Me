@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, redirect, url_for
+from flask import Blueprint, render_template, request, flash, redirect, url_for, session
 from models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db, oauth
@@ -28,12 +28,14 @@ def login():
         password = request.form.get('password')
         user = User.query.filter_by(email=email).first()
         if user:
-            if check_password_hash(user.password, password):
+            if user.is_social_media:
+                flash('Incorrect password', category='error')
+            elif check_password_hash(user.password, password):
                 flash('Logged in successfully', category='success')
                 login_user(user, remember=True)
                 return redirect(url_for('mail.inbox'))
             else:
-                flash('Incorrenct password', category='error')
+                flash('Incorrect password', category='error')
         else:
             flash('Email does not exists password', category='error')
 
@@ -62,7 +64,7 @@ def sign_up():
         else:
             new_user = User(email=email, first_name=first_name,
                             password=generate_password_hash(password1),
-                            issocialmedia=False)
+                            is_social_media=False)
             db.session.add(new_user)
             db.session.commit()
             login_user(new_user, remember=True)
@@ -76,15 +78,13 @@ def sign_up():
 @login_required
 def logout():
     logout_user()
-    for key in list(session.keys()):
-        session.pop(key)
     return  render_template("client/login.html", user=current_user)
 
 
 @auth.route('/google-login', methods=['POST'])
 def google_login():
     if request.method == 'POST':
-        google = oauth.create_client(os.getenv("GOOGLE_NAME"))  # create the google oauth client
+        google = oauth.create_client(os.getenv("GOOGLE_NAME"))
         redirect_uri = url_for('auth.google_authenticate', _external=True)
         return google.authorize_redirect(redirect_uri)
 
@@ -102,16 +102,13 @@ def google_authenticate():
     if l_user:
         login_user(l_user, remember=True)
         flash('Login Successfuly', category='success')
-
-        return redirect(url_for('mail.inbox', _external=True))
     else:
         new_user = User(email=email, first_name=first_name, is_social_media=True, media_type='google')
         db.session.add(new_user)
         db.session.commit()
         login_user(new_user, remember=True)
-        flash('Account Created', category='success')
         flash('Login Successfuly', category='success')
 
-        return redirect(url_for('mail.inbox', _external=True))
+    return redirect(url_for('mail.inbox', _external=True))
   
   

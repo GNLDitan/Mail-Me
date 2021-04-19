@@ -63,7 +63,7 @@ body {
   
 table.mail { height:  80%;}   
 table.mail tr {  height: 10px; }
-table.mail tr td { padding:0px; }
+table.mail tr td { padding-bottom: 0px !important; }
 table.mail tr:hover { cursor: pointer; }
 
 .compose-container .tag {
@@ -91,6 +91,23 @@ table.mail tr:hover { cursor: pointer; }
 .inbox-content.form-group {
     height: 63vh;
 }
+
+.message-container img { 
+  height: 60px;
+  left: 0px;
+  margin: auto;
+
+}
+
+.message-container .content-header { 
+  border-bottom-style: groove; 
+  border-width: 2px;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+}
+.message-container img:hover { cursor: pointer; }
+.content-header .email-sender::before { content: '< ';}
+.content-header .email-sender::after { content: '>';}
 
 
 .google-btn {

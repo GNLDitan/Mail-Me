@@ -5,6 +5,7 @@ from os import path
 import os
 from dotenv import load_dotenv
 from authlib.integrations.flask_client import OAuth
+from pathlib import Path
 
 db = SQLAlchemy()
 load_dotenv()
@@ -21,7 +22,7 @@ def create_app():
     oauth.init_app(app)
 
     register_google(app)
-
+    
     from .views import views
     from .auth import auth
     from .mail import mail
@@ -46,10 +47,15 @@ def create_app():
 
     
 def create_database(app):
-    if not path.exists('website/' + DB_NAME):
+    if not path.exists('app/' + DB_NAME):
         db.create_all(app=app)
         print('Created Database!')
 
 
 def register_google(app):
       oauth = OAuth(app)
+
+def readFile(filename):
+    filehandle = open(filename)
+    print(filehandle.read())
+    filehandle.close()
