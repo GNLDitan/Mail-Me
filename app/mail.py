@@ -204,7 +204,7 @@ def sendemail():
                session['session_email'] = p_email
                for s_email in session['session_email']:
                   #ToDo: find if user exists
-                  #if not send to unsent (must create template) 
+                  #if not send to unsent (must create template) then scrape by beauty soap
                   rcvr = Receiver(message_id = message.id, email = s_email)
                   db.session.add(rcvr)
           else:
