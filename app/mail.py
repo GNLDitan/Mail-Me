@@ -203,6 +203,8 @@ def sendemail():
                p_email.append(r_receiver)
                session['session_email'] = p_email
                for s_email in session['session_email']:
+                  #ToDo: find if user exists
+                  #if not send to unsent (must create template) 
                   rcvr = Receiver(message_id = message.id, email = s_email)
                   db.session.add(rcvr)
           else:
