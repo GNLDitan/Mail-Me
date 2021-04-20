@@ -26,10 +26,12 @@ def create_app():
     from .views import views
     from .auth import auth
     from .mail import mail
+    from .settings import settings
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(mail, url_prefix='/mail/')
+    app.register_blueprint(settings, url_prefix='/settings/')
 
     from .models import User, Messages, Receiver, Carboncopy
     create_database(app)
